@@ -1,0 +1,106 @@
+.register-background {
+  background: linear-gradient(
+    135deg,
+    rgba(34, 193, 195, 1) 0%,
+    rgba(253, 187, 45, 1) 100%
+  );
+  height: 100vh;
+
+  .register-container {
+    width: 400px;
+    height: 440px;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+    background-color: white;
+    border-radius: 15px;
+
+    .register-content {
+      padding: 40px 20px;
+
+      .text-register {
+        text-align: center;
+        font-weight: 700;
+        font-size: 30px;
+        padding-top: 10px;
+      }
+
+      .register-input {
+        margin: 7px 0;
+
+        .ipt-register {
+          font-size: 20px;
+          font-weight: 500;
+          color: rgb(150, 146, 146);
+          border-top: none;
+          border-left: none;
+          border-right: none;
+          border-bottom: 3px solid rgb(231, 221, 221);
+          outline: none;
+        }
+        .ipt-register::placeholder {
+          font-weight: 600;
+          color: rgb(150, 146, 146);
+        }
+
+        .custom-input-password {
+          position: relative;
+
+          i {
+            position: absolute;
+            right: 15px;
+            top: 10px;
+            cursor: pointer;
+          }
+        }
+
+        .lbl-text {
+          padding-left: 10%;
+          font-weight: 600;
+          color: rgb(210, 199, 199);
+        }
+      }
+
+      .err {
+        color: red;
+        padding-left: 20px;
+        padding-top: 3px;
+        font-style: italic;
+      }
+      .success {
+        color: green;
+        padding-left: 20px;
+        padding-top: 3px;
+        font-style: italic;
+      }
+
+      .btn-register {
+        width: 100%;
+        margin: 20px 0;
+        outline: none;
+        border: none;
+        border-radius: 15px;
+        padding: 5px;
+        font-weight: 600;
+        font-size: 20px;
+        color: whitesmoke;
+        background: linear-gradient(
+          135deg,
+          rgba(34, 193, 195, 1) 0%,
+          rgba(253, 187, 45, 1) 100%
+        );
+      }
+      .btn-register:hover {
+        border: 2px solid rgba(34, 193, 195, 1);
+        background: linear-gradient(
+          135deg,
+          rgb(76, 215, 217) 0%,
+          rgb(216, 226, 27) 100%
+        );
+      }
+    }
+  }
+}

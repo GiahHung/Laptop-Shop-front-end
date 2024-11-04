@@ -1,0 +1,104 @@
+body {
+  font-family: "Lato", sans-serif;
+}
+
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  .name {
+   
+    i{
+      padding-right: 5px;
+    }
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: -25px;
+    font-size: 25px;
+    margin-left: 5px;
+    margin-right: 5px;
+    color: greenyellow;
+
+    .closebtn {
+      font-size: 35px;
+      color: white;
+      text-decoration: none;
+    }
+  }
+}
+
+.sidebar .link {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 18px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+  i{
+    color: white;
+    padding-right: 5px;
+  }
+}
+
+.sidebar .link:hover {
+  color: #f1f1f1;
+}
+
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: green;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+}
+
+.openbtn:hover {
+  background-color: #444;
+}
+
+#main {
+  transition: margin-left 0.5s;
+  padding: 16px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidebar {
+    padding-top: 15px;
+  }
+  .sidebar a {
+    font-size: 18px;
+  }
+}
+.dropdown {
+  padding-left: 20px;
+  button{
+    font-size: 18px !important;
+  }
+  .btn-secondary {
+    background-color: #111;
+    border: none;
+  }
+  .dropdown-menu-dark {
+    background-color: #111;
+    .dropdown-item {
+      background-color: #111;
+      text-decoration: none !important;
+      font-size: 18px !important;
+      color: #818181 !important;
+      &:hover {
+        background-color: green !important;
+        color: #f1f1f1 !important;
+      }
+    }
+  }
+}
