@@ -2,12 +2,12 @@ import { configureStore } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
 import rootReducer from "./reducers/rootReducer"; // Assuming rootReducer uses the setup you provided
 import { thunk } from "redux-thunk";
-import storage from "redux-persist/lib/storage"; // Local storage as the storage engine
+import storageSession from "redux-persist/lib/storage/session";
 import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2"; // Optional state reconciler
 
 const persistConfig = {
   key: "root", // The key for the root reducer in storage
-  storage, // The storage engine (local storage in this case)
+  storage: storageSession, // The storage engine (local storage in this case)
   stateReconciler: autoMergeLevel2, // Optional: merge strategies for rehydration
 };
 

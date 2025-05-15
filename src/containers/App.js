@@ -15,6 +15,12 @@ import ManageMouse from "./System/product/ManageMouse";
 import ManagePc from "./System/product/ManagePc";
 import ManagePrinter from "./System/product/ManagePrinter";
 import Revenue from "./System/Revenue";
+import Cart from "./Homepage/Cart";
+import PaymentPage from "./Homepage/PaymentPage";
+import SuccessPage from "./Homepage/SuccessPage";
+import ManageOrder from "./System/ManageOrder";
+import OrderPage from "./Homepage/OrderPage";
+import WithParamsWrapper from "./Homepage/AllProductPage";
 
 class App extends Component {
   state = {};
@@ -29,7 +35,21 @@ class App extends Component {
                 <Route path={path.HOME} element={<Home />} />
 
                 <Route path={path.LOGIN} element={<Login />} />
+
                 <Route path="/register" element={<Register />} />
+
+                <Route path="/cart" element={<Cart />} />
+
+                <Route path="/payment" element={<PaymentPage />} />
+
+                <Route path="/payment-success" element={<SuccessPage />} />
+
+                <Route path="/user-order" element={<OrderPage />} />
+
+                <Route
+                  path="/all-product/:id"
+                  element={<WithParamsWrapper />}
+                />
 
                 <Route path="/system/*" element={<System />}>
                   <Route path="revenue" element={<Revenue />} />
@@ -45,6 +65,8 @@ class App extends Component {
                   <Route path="mouse" element={<ManageMouse />} />
 
                   <Route path="manage-user" element={<ManageUser />} />
+
+                  <Route path="manage-oder" element={<ManageOrder />} />
 
                   <Route path="*" element={<Navigate to={systemMenuPath} />} />
                 </Route>

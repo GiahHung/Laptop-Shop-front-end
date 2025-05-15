@@ -36,7 +36,10 @@ class Header extends Component {
           }}
         >
           <div className="name">
-            <span><i class="fas fa-smile"></i>{userInfo.user.firstName} {userInfo.user.lastName}</span> 
+            <span>
+              <i class="fas fa-smile"></i>
+              {userInfo.firstName} {userInfo.lastName}
+            </span>
             <a href="#" className="closebtn" onClick={this.closeNav}>
               ×
             </a>
@@ -48,6 +51,11 @@ class Header extends Component {
           <Link to="/system/manage-user" className="link">
             Quản lý người dùng
           </Link>
+          <Link to="/system/manage-oder" className="link">
+            Đơn hàng
+          </Link>
+          <Link className="link">Voucher</Link>
+
           <div class="dropdown">
             <button
               class="btn btn-secondary dropdown-toggle"
@@ -63,29 +71,60 @@ class Header extends Component {
               aria-labelledby="dropdownMenuButton2"
             >
               <li>
-                <Link class="dropdown-item " to='/system/laptop'>
+                <Link class="dropdown-item " to="/system/laptop">
                   Laptop
                 </Link>
               </li>
               <li>
-              <Link class="dropdown-item " to='/system/pc'>
+                <Link class="dropdown-item " to="/system/pc">
                   Pc
                 </Link>
               </li>
               <li>
-              <Link class="dropdown-item " to='/system/mouse'>
+                <Link class="dropdown-item " to="/system/mouse">
                   Chuột, bàn phím
                 </Link>
               </li>
               <li>
-              <Link class="dropdown-item " to='/system/printer'>
+                <Link class="dropdown-item " to="/system/printer">
                   Máy in
                 </Link>
               </li>
               <li>
-              <Link class="dropdown-item " to='/system/item'>
+                <Link class="dropdown-item " to="/system/item">
                   Linh kiện
                 </Link>
+              </li>
+            </ul>
+          </div>
+          <div class="dropdown">
+            <button
+              class="btn btn-secondary dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton2"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Chi tiết sản phẩm
+            </button>
+            <ul
+              class="dropdown-menu dropdown-menu-dark"
+              aria-labelledby="dropdownMenuButton2"
+            >
+              <li>
+                <Link class="dropdown-item ">Laptop</Link>
+              </li>
+              <li>
+                <Link class="dropdown-item ">Pc</Link>
+              </li>
+              <li>
+                <Link class="dropdown-item ">Chuột, bàn phím</Link>
+              </li>
+              <li>
+                <Link class="dropdown-item ">Máy in</Link>
+              </li>
+              <li>
+                <Link class="dropdown-item ">Linh kiện</Link>
               </li>
             </ul>
           </div>
@@ -94,8 +133,7 @@ class Header extends Component {
             onClick={processLogout}
             title="Log in"
           >
-           <i class='fas fa-sign-out-alt'></i>
-
+            <i class="fas fa-sign-out-alt"></i>
             Đăng xuất
           </div>
         </div>

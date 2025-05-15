@@ -11,9 +11,10 @@
         color: rgb(121, 108, 92);
     }
 
-    .product{
+    .product-category{
         padding-left: 55px;
         &:hover{
+            cursor: pointer;
             img{
                 height: 62px;
             width: 62px;

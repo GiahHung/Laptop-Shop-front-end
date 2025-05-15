@@ -8,11 +8,13 @@ const initialState = {
   roleIds: [],
   errCode: [],
   errMessage: [],
+  carts: [],
+  allProduct:[],
 };
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.LOGIN_SUCCESS:
-      //   console.log("check action:::::::::", action);
+         console.log("check action:::::::::", action);
       return {
         ...state,
         isLoggedIn: true,
@@ -65,6 +67,29 @@ const userReducer = (state = initialState, action) => {
     case actionTypes.REGISTER_FAIL:
       state.errCode = [];
       state.errMessage = [];
+      return {
+        ...state,
+      };
+    case actionTypes.FETCH_CART_SUCCESS:
+      state.carts = action.data;
+      return {
+        ...state,
+      };
+
+    case actionTypes.FETCH_CART_FAIL:
+      state.carts = [];
+      return {
+        ...state,
+      };
+
+    case actionTypes.FETCH_ALL_PRODUCT_CATEGORY_SUCCESS:
+      state.allProduct = action.allProduct;
+      return {
+        ...state,
+      };
+
+    case actionTypes.FETCH_ALL_PRODUCT_CATEGORY_FAIL:
+      state.allProduct = [];
       return {
         ...state,
       };

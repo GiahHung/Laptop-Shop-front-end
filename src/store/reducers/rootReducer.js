@@ -5,12 +5,12 @@ import userReducer from "./userReducer";
 import appReducer from "./appReducer";
 
 import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
-import storage from "redux-persist/lib/storage";
+import storageSession from "redux-persist/lib/storage/session";
 import { persistReducer } from "redux-persist";
 
 
 const persistCommonConfig = {
-  storage: storage,
+  storage: storageSession,
   stateReconciler: autoMergeLevel2,
 };
 

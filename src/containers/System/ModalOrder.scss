@@ -1,0 +1,36 @@
+.product {
+  border: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 4px;
+}
+.price {
+  font-weight: 600;
+}
+.edit {
+  color: black;
+  margin-right: 20px;
+  &:hover {
+    color: rgb(238, 204, 34);
+  }
+}
+.delete {
+  color: black;
+  &:hover {
+    color: rgb(182, 50, 50);
+  }
+}
+.pagination {
+  margin: 0 auto !important;
+  width: 600px !important;
+}
+.page-item.active .page-link {
+  background-color: rgb(139, 217, 21) !important;
+  border-color: rgb(139, 217, 21) !important;
+}
+.page-link {
+  color: black !important;
+}
+.title-order{
+  font-weight: 600;
+}

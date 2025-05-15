@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import HomePageHeader from "./HomePageHeader";
-import HomePageBanner from "./HomePageBanner";
+import WithNavigateWrapper from "./HomePageBanner";
 import HotPc from "./section/HotPc";
 import HotLaptop from "./section/HotLaptop";
 import "slick-carousel/slick/slick.css";
@@ -31,18 +31,18 @@ class HomePage extends Component {
     };
     return (
       <>
-      <div className="homepage">
-        <HomePageHeader />
-        <HomePageBanner />
-        <HotPc settings={settings}/>
-        <HotLaptop settings={settings}/>
-        <Category/>
-        <Laptop settings={settings}/>
-        <Pc settings={settings}/>
-        <MouseAndKey settings={settings}/>
-        <Item settings={settings}/>
-        <Printer settings={settings}/>
-        <HomePageFooter/>
+        <div className="homepage">
+          <HomePageHeader />
+          <WithNavigateWrapper />
+          <HotPc settings={settings} />
+          <HotLaptop settings={settings} />
+          <Category />
+          <Laptop settings={settings} />
+          <Pc settings={settings} />
+          <MouseAndKey settings={settings} />
+          <Item settings={settings} />
+          <Printer settings={settings} />
+          <HomePageFooter />
         </div>
       </>
     );

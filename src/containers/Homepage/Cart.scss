@@ -1,0 +1,112 @@
+.cart-container {
+  margin: 160px auto;
+
+  .cart-content {
+    padding-top: 15px;
+    width: 60%;
+    background-color: rgb(245, 243, 243);
+    margin: auto;
+
+    .left {
+      padding-top: 15px;
+      img {
+        height: 90px;
+        width: 90px;
+      }
+      .delete {
+        padding-top: 5px;
+        padding-left: 16px;
+
+        button {
+          border: none;
+          outline: none;
+          &:hover {
+            color: red;
+            transition: 0.1s;
+          }
+        }
+      }
+    }
+    .middle {
+      font-size: 1.2rem;
+      padding-top: 15px;
+    }
+    .right {
+      padding-top: 15px;
+      .price {
+        color: rgb(242, 34, 34);
+        font-weight: 600;
+        font-size: 1.2rem;
+      }
+      .quantity {
+        margin-top: 25px;
+        display: flex;
+        .decrease {
+          background-color: white;
+          border: 1px solid black;
+          padding: 0 9px;
+          border-right: none;
+          border-top-left-radius: 5px;
+          border-bottom-left-radius: 5px;
+        }
+        .increase {
+          background-color: white;
+          border: 1px solid black;
+          padding: 0 9px;
+          border-left: none;
+          border-top-right-radius: 5px;
+          border-bottom-right-radius: 5px;
+        }
+        span {
+          padding: 0 14px;
+          background-color: white;
+          border: 1px solid black;
+        }
+      }
+    }
+
+    .bottom {
+      text-align: center;
+      margin: 20px 0;
+
+      .total-price {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        gap: 100px;
+        font-size: 20px;
+        font-weight: 600;
+        .total {
+          color: red;
+          font-size: 22px;
+        }
+      }
+      button {
+        border: none;
+        outline: none;
+        background-color: red;
+        color: white;
+        padding: 9px 27px;
+        font-size: 17px;
+        font-weight: 500;
+        margin-top: 30px;
+        border-radius: 7px;
+        a{
+          color: white;
+          font-size: 17px;
+          font-weight: 500;
+          text-decoration: none;
+        }
+      }
+    }
+    .emptyCart {
+      text-align: center;
+      margin: 80px 0;
+      .content {
+        margin-bottom: 20px;
+        font-size: 1.2rem;
+      }
+      
+    }
+  }
+}

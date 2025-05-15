@@ -1,0 +1,44 @@
+.container {
+  .control {
+    .search {
+      margin-top: 40px;
+      margin-left: 50px;
+      position: relative;
+      width: 400px;
+      input {
+        height: 40px;
+        width: 380px;
+        border-radius: 7px;
+        border: 3px solid green;
+        outline: none;
+      }
+      i {
+        position: absolute;
+        right: 40px;
+        bottom: 10px;
+        color: green;
+      }
+    }
+  }
+  .table-order {
+    margin-top: 70px;
+    th {
+      color: green;
+    }
+    .sort {
+      font-size: 20px;
+      padding-left: 20px;
+      &:hover {
+        i {
+          color: red;
+        }
+      }
+    }
+  }
+}
+.red{
+  color: red !important;
+}
+.green{
+  color: rgb(20, 225, 34) !important;
+}

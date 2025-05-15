@@ -6,7 +6,15 @@ const instance = axios.create({
     // withCredentials: true
 });
 
-
+instance.interceptors.request.use(
+  (config) => {
+    config.headers.Authorization = `Bearer ${sessionStorage.getItem(
+      "accessToken"
+    )}`;
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
 instance.interceptors.response.use(
     (response) => {
         // Thrown error for request with OK status code

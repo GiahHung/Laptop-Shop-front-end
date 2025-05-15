@@ -4,6 +4,10 @@ import "./Product.scss";
 import * as actions from "../../../store/actions";
 import { CRUD_ACTION } from "../../../utils/constant";
 import ReactPaginate from "react-paginate";
+import CommonUtils from "../../../utils/CommonUtils";
+import "yet-another-react-lightbox/styles.css";
+import Lightbox from "yet-another-react-lightbox";
+import { Buffer } from "buffer";
 
 class ManageLaptop extends Component {
   constructor(props) {
@@ -17,6 +21,9 @@ class ManageLaptop extends Component {
       currentPage: 1,
       currentLimit: 8,
 
+      previewImg: "",
+      isPreviewOpen: false,
+
       //product info
       nameProduct: "",
       price: "",
@@ -25,20 +32,21 @@ class ManageLaptop extends Component {
       brandId: "",
       statusId: "",
       category: "c2",
+      image: "",
       action: "",
-      editProductId:''
+      editProductId: "",
     };
   }
 
   componentDidMount() {
-    this.props.fetchHotId();
-    this.props.fetchBrandId();
-    this.props.fetchStatusProductId();
     this.props.fetchAllProduct(
       this.state.currentPage,
       this.state.currentLimit,
       "c2"
     );
+    this.props.fetchBrandId();
+    this.props.fetchStatusProductId();
+    this.props.fetchHotId();
   }
 
   componentDidUpdate(prevProps, prevState, snapShot) {
@@ -50,6 +58,8 @@ class ManageLaptop extends Component {
         hotId: "",
         brandId: "",
         statusId: "",
+        image: "",
+        previewImg: "",
         action: CRUD_ACTION.CREATE,
         arrProduct: this.props.products,
         totalPage: this.props.totalPages,
@@ -59,22 +69,22 @@ class ManageLaptop extends Component {
       let arrHot = this.props.hotIds;
       this.setState({
         arrHot: arrHot,
-        // hotId: arrHot && arrHot.length > 0 ? arrHot[0].keyMap : ""
+        hotId: arrHot && arrHot.length > 0 ? arrHot[0].keyMap : "",
       });
     }
     if (prevProps.brandIds !== this.props.brandIds) {
       let arrBrandId = this.props.brandIds;
       this.setState({
         arrBrand: arrBrandId,
-        // brandId:
-        //  arrBrandId && arrBrandId.length > 0 ? arrBrandId[0].keyMap : "",
+        brandId:
+          arrBrandId && arrBrandId.length > 0 ? arrBrandId[0].keyMap : "",
       });
     }
     if (prevProps.statusProducts !== this.props.statusProducts) {
       let arrStatus = this.props.statusProducts;
       this.setState({
         arrStatus: arrStatus,
-        // statusId: arrStatus && arrStatus.length > 0 ? arrStatus[0].keyMap : "",
+        statusId: arrStatus && arrStatus.length > 0 ? arrStatus[0].keyMap : "",
       });
     }
   }
@@ -129,9 +139,11 @@ class ManageLaptop extends Component {
           brandId: this.state.brandId,
           statusId: this.state.statusId,
           categoryId: this.state.category,
+          image: this.state.image,
         },
         this.state.currentPage,
-        this.state.currentLimit
+        this.state.currentLimit,
+        this.state.category
       );
     } else {
       this.props.updateProduct(
@@ -144,14 +156,20 @@ class ManageLaptop extends Component {
           brandId: this.state.brandId,
           statusId: this.state.statusId,
           categoryId: this.state.category,
+          image: this.state.image,
         },
         this.state.currentPage,
-        this.state.currentLimit
+        this.state.currentLimit,
+        this.state.category
       );
     }
   };
 
   handleEditProduct = (product) => {
+    let imageBase64 = "";
+    if (product.image) {
+      imageBase64 = Buffer.from(product.image, "base64").toString("binary");
+    }
     this.setState({
       nameProduct: product.title,
       price: product.price,
@@ -159,6 +177,7 @@ class ManageLaptop extends Component {
       hotId: product.hotId,
       brandId: product.brandId,
       statusId: product.statusId,
+      previewImg: imageBase64,
       action: CRUD_ACTION.EDIT,
       editProductId: product.id,
     });
@@ -168,8 +187,29 @@ class ManageLaptop extends Component {
     this.props.deleteProduct(
       id,
       this.state.currentPage,
-      this.state.currentLimit
+      this.state.currentLimit,
+      this.state.category
     );
+  };
+
+  handleOnchangePreviewImg = async (event) => {
+    let data = event.target.files;
+    let file = data[0];
+    if (file) {
+      let objectUrl = URL.createObjectURL(file);
+      let base64 = await CommonUtils.getBase64(file);
+      // console.log("base 64: ", base64)
+      this.setState({
+        previewImg: objectUrl,
+        image: base64,
+      });
+    }
+  };
+
+  handlePreviewOpen = () => {
+    this.setState({
+      isPreviewOpen: true,
+    });
   };
   render() {
     let arrHot = this.state.arrHot;
@@ -178,10 +218,10 @@ class ManageLaptop extends Component {
     let arrProduct = this.state.arrProduct;
     let { nameProduct, price, discount, hotId, brandId, statusId, action } =
       this.state;
-    console.log("check data", this.state);
+    console.log("check data", this.state.arrProduct);
     return (
       <React.Fragment>
-        <div className="title">Danh sách sản phẩm</div>
+        <div className="title">LAPTOP</div>
         <div className="col-2 logo">
           <i class="fab fa-pied-piper-alt"></i>
           <span>LOGGOO</span>
@@ -282,6 +322,30 @@ class ManageLaptop extends Component {
               </select>
             </div>
           </div>
+          <div className="col-3 mt-3 mb-5 upload-image">
+            <label>Hình ảnh</label>
+            <div className="image">
+              <input
+                id="upload"
+                type="file"
+                className="form-control"
+                hidden
+                onChange={(event) => {
+                  this.handleOnchangePreviewImg(event);
+                }}
+              />
+              <div
+                className="preview-img"
+                style={{ backgroundImage: `url(${this.state.previewImg})` }}
+                onClick={() => {
+                  this.handlePreviewOpen();
+                }}
+              ></div>
+              <label htmlFor="upload" className="upload-btn">
+                Tải ảnh<i className="fas fa-upload"></i>
+              </label>
+            </div>
+          </div>
           <button
             className={action === CRUD_ACTION.CREATE ? "btn-save" : "btn-edit"}
             onClick={() => {
@@ -308,7 +372,7 @@ class ManageLaptop extends Component {
                 return (
                   <tr key={index}>
                     <td>{item.title}</td>
-                    <td>{item.price}VND</td>
+                    <td> {Number(item.price).toLocaleString("vi-VN") + "đ"}</td>
                     <td>{item.brandData.value}</td>
                     <td>{item.statusData.value}</td>
                     <td>
@@ -356,6 +420,13 @@ class ManageLaptop extends Component {
             />
           </div>
         )}
+        {this.state.isPreviewOpen && (
+          <Lightbox
+            open={this.state.isPreviewOpen}
+            close={() => this.setState({ isPreviewOpen: false })}
+            slides={[{ src: this.state.previewImg }]}
+          />
+        )}
       </React.Fragment>
     );
   }
@@ -377,12 +448,12 @@ const mapDispatchToProps = (dispatch) => {
     fetchStatusProductId: () => dispatch(actions.fetchStatusProductId()),
     fetchAllProduct: (page, limit, category) =>
       dispatch(actions.fetchAllProduct(page, limit, category)),
-    createProduct: (data, page, limit) =>
-      dispatch(actions.createProduct(data, page, limit)),
-    deleteProduct: (id, page, limit) =>
-      dispatch(actions.deleteProduct(id, page, limit)),
-    updateProduct: (data, page, limit) =>
-      dispatch(actions.updateProduct(data, page, limit)),
+    createProduct: (data, page, limit, category) =>
+      dispatch(actions.createProduct(data, page, limit, category)),
+    deleteProduct: (id, page, limit, category) =>
+      dispatch(actions.deleteProduct(id, page, limit, category)),
+    updateProduct: (data, page, limit, category) =>
+      dispatch(actions.updateProduct(data, page, limit, category)),
   };
 };
 

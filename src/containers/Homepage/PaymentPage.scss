@@ -1,0 +1,54 @@
+.pay-container {
+  margin-top: 150px;
+  margin-bottom: 100px;
+
+  .pay-content {
+    .content-left {
+      .main-content {
+        margin-top: 15px;
+        border: 1px solid rgb(124, 171, 53);
+        border-radius: 5px;
+        padding: 5px 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 19px;
+        img {
+          height: 90px;
+          width: 90px;
+        }
+        .right {
+          display: flex;
+          justify-content: space-between;
+          .quantity {
+            color: red;
+          }
+        }
+      }
+    }
+    .content-right {
+      border: 1px solid rgb(124, 171, 53);
+      border-radius: 10px;
+      .total-price {
+        font-weight: 600;
+        font-size: 17px;
+      }
+
+      button {
+        background-color: rgb(237, 73, 73);
+        border: none;
+        outline: none;
+        border-radius: 10px;
+        color: white;
+        font-weight: 600;
+        font-size: 19px;
+        padding: 10px 0;
+        margin-bottom: 10px;
+        &:hover {
+          color: black;
+          transition: 0.1s;
+        }
+      }
+    }
+  }
+}

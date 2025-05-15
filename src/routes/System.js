@@ -6,17 +6,22 @@ import Header from "../containers/header/Header";
 class System extends Component {
   render() {
     const { isLoggedIn } = this.props;
+     const { userInfo } = this.props;
     return (
       <React.Fragment>
         {isLoggedIn ? (
-          <>
-            <Header />
-            <div className="system-container">
-              <div className="system-list">
-                <Outlet />
+          userInfo.roleId === "R1" ? (
+            <>
+              <Header />
+              <div className="system-container">
+                <div className="system-list">
+                  <Outlet />
+                </div>
               </div>
-            </div>
-          </>
+            </>
+          ) : (
+            <Navigate to="/home" />
+          )
         ) : (
           <Navigate to="/login" />
         )}
@@ -29,6 +34,7 @@ const mapStateToProps = (state) => {
   return {
     systemMenuPath: state.app.systemMenuPath,
     isLoggedIn: state.user.isLoggedIn,
+    userInfo: state.user.userInfo,
   };
 };
 

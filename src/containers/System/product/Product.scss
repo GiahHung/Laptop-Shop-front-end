@@ -65,3 +65,28 @@
   .page-link {
     color: black !important;
   }
+  .upload-image{
+  
+    .image{
+        left: 15px;
+        .upload-btn{
+            text-align: center;
+            margin: 5px 0 0 40px;
+            cursor: pointer;
+            &:hover{
+                color: rgb(5, 201, 201);
+                transition: .2s;
+            }
+        }
+        .preview-img{
+            width: 150px;
+            height: 150px;
+            border-radius: 100%;
+            border: 1px solid black;
+
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    }
+}

@@ -1,0 +1,91 @@
+.revenue-container {
+  .block {
+    margin-top: 40px;
+    margin-bottom: 80px;
+    margin-left: 50px;
+    .left {
+      .content {
+        height: 140px;
+        width: 75%;
+        border-radius: 20px;
+        background-color: rgb(224, 218, 219);
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        .revenue-title {
+          color: black;
+          font-size: 1.7rem;
+          font-weight: 500;
+          padding-top: 20px;
+        }
+        .number {
+            font-size: 1.7rem;
+            font-weight: 500;
+            color: rgb(241, 71, 71);
+        }
+      }
+    }
+    .middle {
+      .content {
+        width: 75%;
+        height: 140px;
+        border-radius: 20px;
+        background-color: rgb(224, 218, 219);
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        .revenue-title {
+            color: black;
+            font-size: 1.7rem;
+            font-weight: 500;
+            padding-top: 20px;
+        }
+        .number {
+            font-size: 1.7rem;
+            font-weight: 500;
+        }
+      }
+    }
+    .right {
+      .content {
+        width: 75%;
+        height: 140px;
+        border-radius: 20px;
+        background-color: rgb(224, 218, 219);
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        .revenue-title {
+            color: black;
+            font-size: 1.7rem;
+            font-weight: 500;
+            padding-top: 20px;
+        }
+        .number {
+            font-size: 1.7rem;
+            font-weight: 500;
+        }
+      }
+    }
+  }
+  .revenue-detail{
+    select{
+        font-size: 20px;
+        margin-left: 40px;
+    }
+    th{
+        font-size: 20px;
+    }
+    .total{
+        color: red;
+        font-size: 18px;
+        font-weight: 600;
+    }
+  }
+}

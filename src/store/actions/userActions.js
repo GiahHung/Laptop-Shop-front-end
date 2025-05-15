@@ -6,6 +6,13 @@ import {
   createUserService,
   deleteUserService,
   editUserService,
+  handleGetCartService,
+  addToCartService,
+  handleEastCartService,
+  deleteCartService,
+  increaseQuantityService,
+  decreaseQuantityService,
+  handleGetAllProductService,
 } from "../../services/userServices";
 
 export const fetchAllUser = (page, limit) => {
@@ -140,6 +147,175 @@ export const userLoginFail = () => ({
   type: actionTypes.LOGIN_FAIL,
 });
 
-export const processLogout = () => ({
-  type: actionTypes.PROCESS_LOGOUT,
-});
+export const fetchCart = (userId) => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await handleGetCartService(userId);
+      if (res && res.errCode === 0) {
+        dispatch({
+          type: actionTypes.FETCH_CART_SUCCESS,
+          data: res.data,
+        });
+      } else {
+        dispatch({
+          type: actionTypes.FETCH_CART_FAIL,
+        });
+      }
+    } catch (e) {
+      console.log("FETCH_CART_FAIL: ", e);
+      dispatch({
+        type: actionTypes.FETCH_CART_FAIL,
+      });
+    }
+  };
+};
+
+export const eastCart = (userId, localProduct) => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await handleEastCartService(userId, localProduct);
+      if (res && res.errCode === 0) {
+        dispatch({
+          type: actionTypes.EAST_CART_SUCCESS,
+          data: res.data,
+        });
+      } else {
+        dispatch({
+          type: actionTypes.EAST_CART_FAIL,
+        });
+      }
+    } catch (e) {
+      console.log("EAST_CART_FAIL: ", e);
+      dispatch({
+        type: actionTypes.EAST_CART_FAIL,
+      });
+    }
+  };
+};
+
+export const addProductToCart = (data, userId) => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await addToCartService(data);
+      if (res && res.errCode === 0) {
+        dispatch({
+          type: actionTypes.ADD_TO_CART_SUCCESS,
+        });
+        toast.success("Sản phẩm đã được thêm vào giỏ hàng");
+        dispatch(fetchCart(userId));
+      } else {
+        toast.error("Thất bại");
+        dispatch({
+          type: actionTypes.ADD_TO_CART_FAIL,
+        });
+      }
+    } catch (e) {
+      console.log("ADD_TO_CART_FAIL: ", e);
+      dispatch({
+        type: actionTypes.ADD_TO_CART_FAIL,
+      });
+    }
+  };
+};
+
+export const deleteProductInCart = (productId, userId) => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await deleteCartService(productId);
+      if (res && res.errCode === 0) {
+        dispatch({
+          type: actionTypes.DELETE_PRODUCT_IN_CART_SUCCESS,
+        });
+
+        dispatch(fetchCart(userId));
+      } else {
+        dispatch({
+          type: actionTypes.DELETE_PRODUCT_IN_CART_FAIL,
+        });
+      }
+    } catch (e) {
+      console.log("DELETE_PRODUCT_IN_CART_FAIL: ", e);
+      dispatch({
+        type: actionTypes.DELETE_PRODUCT_IN_CART_FAIL,
+      });
+    }
+  };
+};
+
+export const increaseQuantity = (data, userId) => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await increaseQuantityService(data);
+      if (res && res.errCode === 0) {
+        dispatch({
+          type: actionTypes.INCREASE_QUANTITY_SUCCESS,
+        });
+
+        dispatch(fetchCart(userId));
+      } else {
+        dispatch({
+          type: actionTypes.INCREASE_QUANTITY_FAIL,
+        });
+      }
+    } catch (e) {
+      console.log("INCREASE_QUANTITY_FAIL: ", e);
+      dispatch({
+        type: actionTypes.INCREASE_QUANTITY_FAIL,
+      });
+    }
+  };
+};
+
+export const decreaseQuantity = (data, userId) => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await decreaseQuantityService(data);
+      if (res && res.errCode === 0) {
+        dispatch({
+          type: actionTypes.DECREASE_QUANTITY_SUCCESS,
+        });
+
+        dispatch(fetchCart(userId));
+      } else {
+        dispatch({
+          type: actionTypes.DECREASE_QUANTITY_FAIL,
+        });
+      }
+    } catch (e) {
+      console.log("DECREASE_QUANTITY_FAIL: ", e);
+      dispatch({
+        type: actionTypes.DECREASE_QUANTITY_FAIL,
+      });
+    }
+  };
+};
+
+export const processLogout = () => {
+  return async (dispatch) => {
+    sessionStorage.removeItem("accessToken");
+    dispatch({ type: actionTypes.PROCESS_LOGOUT });
+  };
+};
+
+export const fetchAllProductCategory = (category) => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await handleGetAllProductService(category);
+      if (res && res.errCode === 0) {
+        dispatch({
+          type: actionTypes.FETCH_ALL_PRODUCT_CATEGORY_SUCCESS,
+          data: res.data,
+        });
+      } else {
+        dispatch({
+          type: actionTypes.FETCH_ALL_PRODUCT_CATEGORY_FAIL,
+        });
+      }
+    } catch (e) {
+      console.log("FETCH_ALL_PRODUCT_CATEGORY_FAIL: ", e);
+      dispatch({
+        type: actionTypes.FETCH_ALL_PRODUCT_CATEGORY_FAIL,
+      });
+    }
+  };
+};

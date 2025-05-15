@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import "./HomePageBanner.scss";
 import Slider from "react-slick";
 import banner7 from "../../assets/banner/banner7.webp";
@@ -10,11 +9,15 @@ import uuDai1 from "../../assets/section/uuDai1.gif";
 import uuDai2 from "../../assets/section/uuDai2.gif";
 import uuDai3 from "../../assets/section/uuDai3.gif";
 import uuDai4 from "../../assets/section/uuDai4.gif";
+import { useNavigate } from "react-router-dom";
 
 class HomePageBanner extends Component {
   constructor(props) {
     super(props);
   }
+  handleGetAllProduct = (id) => {
+     this.props.navigate(`/all-product/${id}`);
+  };
   render() {
     let settings = {
       dots: false,
@@ -34,23 +37,53 @@ class HomePageBanner extends Component {
               <div className="row">
                 <div className="col-2 category">
                   <i class="fas fa-laptop"></i>
-                  <span>Laptop</span>
+                  <span
+                    onClick={() => {
+                      this.handleGetAllProduct("c2");
+                    }}
+                  >
+                    Laptop
+                  </span>
                 </div>
                 <div className="col-1 category">
                   <i class="fas fa-desktop"></i>
-                  <span>Pc</span>
+                  <span
+                    onClick={() => {
+                      this.handleGetAllProduct("c1");
+                    }}
+                  >
+                    Pc
+                  </span>
                 </div>
                 <div className="col-2 category">
                   <i class="fas fa-plug"></i>
-                  <span>Linh kiện máy tính</span>
+                  <span
+                    onClick={() => {
+                      this.handleGetAllProduct("c3");
+                    }}
+                  >
+                    Linh kiện máy tính
+                  </span>
                 </div>
                 <div className="col-2 category">
                   <i class="fas fa-keyboard"></i>
-                  <span>Phụ kiện máy tính</span>
+                  <span
+                    onClick={() => {
+                      this.handleGetAllProduct("c4");
+                    }}
+                  >
+                    Phụ kiện máy tính
+                  </span>
                 </div>
                 <div className="col-2 category">
                   <i class="fas fa-print"></i>
-                  <span>Máy in</span>
+                  <span
+                    onClick={() => {
+                      this.handleGetAllProduct("c5");
+                    }}
+                  >
+                    Máy in
+                  </span>
                 </div>
                 <div className="col-3 hotline">
                   <i class="fas fa-headphones"></i>Hotline: 0918123762
@@ -96,19 +129,17 @@ class HomePageBanner extends Component {
               </div>
             </div>
           </div>
-
-         
         </div>
       </>
     );
   }
 }
-const mapStateToProps = (state) => {
-  return {};
-};
 
-const mapDispatchToProps = (dispatch) => {
-  return {};
-};
+function WithNavigateWrapper(props) {
+  const navigate = useNavigate();
+  return <HomePageBanner {...props} navigate={navigate} />;
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePageBanner);
+export default WithNavigateWrapper;
+
+

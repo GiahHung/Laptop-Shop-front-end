@@ -3,10 +3,13 @@ import { connect } from "react-redux";
 import "./Login.scss";
 import { Link, Navigate } from "react-router-dom";
 import * as actions from "../../store/actions";
-import { handleLoginService } from "../../services/userServices";
-import { USER_ROLE } from "../../utils/constant";
+import {
+  handleLoginService,
+  loginWithGoogle,
+} from "../../services/userServices";
 import _ from "lodash";
-import System from "../../routes/System";
+import { GoogleLogin } from "@react-oauth/google";
+import { environment } from "../../Environment";
 
 class Login extends Component {
   constructor(props) {
@@ -47,6 +50,7 @@ class Login extends Component {
   };
 
   handleLogin = async () => {
+    console.log(environment.CLIENT_ID);
     let { userName, password } = this.state;
     this.setState({
       errMessage: "",
@@ -57,6 +61,35 @@ class Login extends Component {
         let message = data.errMessage;
         this.setState({
           errMessage: message,
+        });
+      } else {
+        sessionStorage.setItem("accessToken", data.token);
+        this.props.userLoginSuccess(data.user);
+        console.log("Login success!!!!!!!!");
+      }
+      console.log(data);
+    } catch (error) {
+      if (error.response) {
+        if (error.response.data) {
+          this.setState({
+            errMessage: error.response.data.message,
+          });
+        }
+      }
+      console.log(error.response);
+    }
+  };
+
+  handleLoginWithGoogle = async (credentialResponse) => {
+    
+    this.setState({
+      errMessage: "",
+    });
+    try {
+      let data = await loginWithGoogle(credentialResponse.credential);
+      if (data && data.errCode !== 0) {
+        this.setState({
+          errMessage: "Đăng nhập thất bại",
         });
       } else {
         this.props.userLoginSuccess(data);
@@ -78,12 +111,16 @@ class Login extends Component {
   render() {
     //console.log("-----check state:", this.state);
     const { isLogin } = this.props;
-    const {userInfo} = this.props;
+    const { userInfo } = this.props;
     return (
       <>
         {isLogin ? (
           // <Navigate to={this.state.link} />
-          (userInfo.user.roleId === 'R1' ? <Navigate to='/system'/> : <Navigate to='/home'/>)
+          userInfo.roleId === "R1" ? (
+            <Navigate to="/system" />
+          ) : (
+            <Navigate to="/home" />
+          )
         ) : (
           <div className="login-background">
             <div className="login-container ">
@@ -155,7 +192,7 @@ class Login extends Component {
                 </div>
 
                 <div className="col-12 social-icon">
-                  <i className="fab fa-google-plus google"></i>
+                  <GoogleLogin onSuccess={this.handleLoginWithGoogle} />
                   <i className="fab fa-facebook facebook"></i>
                 </div>
               </div>

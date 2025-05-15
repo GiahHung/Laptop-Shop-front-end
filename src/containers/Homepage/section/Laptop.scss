@@ -15,10 +15,10 @@
     .title {
       font-size: 17px;
       font-weight: 600;
-      height: 45px;
+     
       color: white;
       width: 20%;
-      padding-top: 10px;
+      margin-top: 40px;
     }
     .see-more {
       position: relative;
@@ -34,6 +34,7 @@
           color: rgb(83, 121, 26);
           font-size: 15px;
           transition: 0.2s;
+          cursor: pointer;
         }
       }
     }
